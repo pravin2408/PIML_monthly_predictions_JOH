@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 import numpy as np
 import pandas as pd
 from sklearn.metrics import mean_squared_error
@@ -16,9 +13,6 @@ from sklearn.svm import SVR
 from sklearn.gaussian_process.kernels import Matern
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import make_scorer
-
-
-# In[3]:
 
 
 # shifts columns of dataframe df by shift
@@ -144,9 +138,6 @@ def my_custom_loss_func(s,o):
 custom_scorer = make_scorer(my_custom_loss_func, greater_is_better=False)
 
 
-# In[4]:
-
-
 # generating training output for ET
 def predict_train_ET(model,model_param,train_x,train_y,name,nse,pbias,rmser,wb,model_parameters, store=True):
     predictions=model.predict(train_x)
@@ -161,9 +152,6 @@ def predict_train_ET(model,model_param,train_x,train_y,name,nse,pbias,rmser,wb,m
     print(pc_bias(predictions,train_y.values))
     print(rmse(predictions,train_y.values))
     print(WB(predictions,train_y.values))
-
-
-# In[5]:
 
 
 # generating training output for Q
@@ -181,10 +169,7 @@ def predict_train_Q(model,model_param,train_x,train_y,name,nse,pbias,rmser,wb,mo
     print(rmse(predictions,train_y.values))
     print(WB(predictions,train_y.values))
 
-
-# In[6]:
-
-
+    
 # SVR model for ET prediction
 def model_svr_ET(train_dfx_ET,train_dfy_ET, test_dfx_Q):
     c_value = np.linspace(1, 5, 5)
@@ -204,9 +189,6 @@ def model_svr_ET(train_dfx_ET,train_dfy_ET, test_dfx_Q):
     return test_ET_svr, train_ET_svr
 
 
-# In[7]:
-
-
 # SVR model for Q prediction
 def model_svr_Q(train_dfx_Q,train_dfy_Q):
     c_value = np.linspace(1, 5, 5)
@@ -221,9 +203,6 @@ def model_svr_Q(train_dfx_Q,train_dfy_Q):
     predict_train_Q(best_grid_svr,model_param, train_dfx_Q, train_dfy_Q, 'Q_svr_train', 'NS_svr_Q', 'PBIAS_svr_Q', 'RMSE_svr_Q', 'WB_svr_Q','Model_svr_Q')
     test_Q_svr = model_svr.predict(test_dfx_Q)
     return test_Q_svr 
-
-
-# In[8]:
 
 
 # GPR model for ET prediction
@@ -245,10 +224,6 @@ def model_gpr_mtrn_ET(train_dfx_ET,train_dfy_ET, test_dfx_Q):
     train_dfx_Q['ET(t)'] = train_ET_gpr_mtrn
     return test_ET_gpr_mtrn, train_ET_gpr_mtrn
 
-
-# In[9]:
-
-
 # GPR model for Q prediction
 def model_gpr_mtrn_Q(train_dfx_Q,train_dfy_Q):
     alphas = [1e-10]
@@ -265,9 +240,6 @@ def model_gpr_mtrn_Q(train_dfx_Q,train_dfy_Q):
     predict_train_Q(best_grid_gpr_mtrn,model_param, train_dfx_Q, train_dfy_Q, 'Q_gpr_mtrn_train', 'NS_gpr_mtrn_Q', 'PBIAS_gpr_mtrn_Q', 'RMSE_gpr_mtrn_Q', 'WB_gpr_mtrn_Q','Model_gpr_mtrn_Q')
     test_Q_gpr_mtrn = model_gpr_mtrn.predict(test_dfx_Q)
     return test_Q_gpr_mtrn
-
-
-# In[10]:
 
 
 # LASSO regression model for ET prediction
@@ -288,10 +260,6 @@ def model_lasso_ET(train_dfx_ET, train_dfy_ET, test_dfx_Q):
     train_dfx_Q['ET(t)'] = train_ET_lasso
     return test_ET_lasso, train_ET_lasso
 
-
-# In[11]:
-
-
 # LASSO regression model for Q prediction
 def model_lasso_Q(train_dfx_Q,train_dfy_Q):
     alphas = np.linspace(0.1, 1.0, 10)
@@ -306,10 +274,6 @@ def model_lasso_Q(train_dfx_Q,train_dfy_Q):
     predict_train_Q(best_grid_lasso,model_param, train_dfx_Q, train_dfy_Q, 'Q_lasso_train', 'NS_lasso_Q', 'PBIAS_lasso_Q', 'RMSE_lasso_Q', 'WB_lasso_Q','Model_lasso_Q')
     test_Q_lasso=model_lasso.predict(test_dfx_Q)
     return test_Q_lasso
-
-
-# In[12]:
-
 
 # Ridge regression model for ET prediction
 def model_ridge_ET(train_dfx_ET, train_dfy_ET, test_dfx_Q):
@@ -330,9 +294,6 @@ def model_ridge_ET(train_dfx_ET, train_dfy_ET, test_dfx_Q):
     return test_ET_ridge, train_ET_ridge
 
 
-# In[13]:
-
-
 # Ridge regression model for Q prediction
 def model_ridge_Q(train_dfx_Q,train_dfy_Q):
     alphas = np.linspace(0.1, 1.0, 10)
@@ -347,9 +308,6 @@ def model_ridge_Q(train_dfx_Q,train_dfy_Q):
     predict_train_Q(best_grid_ridge,model_param, train_dfx_Q, train_dfy_Q, 'Q_ridge_train', 'NS_ridge_Q', 'PBIAS_ridge_Q', 'RMSE_ridge_Q', 'WB_ridge_Q','Model_ridge_Q')
     test_Q_ridge=model_ridge.predict(test_dfx_Q)    
     return test_Q_ridge
-
-
-# In[14]:
 
 
 Perform = pd.DataFrame()
