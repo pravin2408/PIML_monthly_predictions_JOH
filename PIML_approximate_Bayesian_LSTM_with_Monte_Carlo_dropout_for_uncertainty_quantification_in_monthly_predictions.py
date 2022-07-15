@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 import numpy as np
 import random
 import tensorflow as tf
@@ -19,22 +16,9 @@ from sklearn.metrics import mean_squared_error,r2_score
 from math import sqrt
 
 
-# In[2]:
-
-
 # fix the figure size and axes grid
 mpl.rcParams['figure.figsize'] =  (6,6)
 mpl.rcParams['axes.grid'] = False
-
-
-# In[3]:
-
-
-stn_names = pd.read_csv("/media/antec/MIR_lab/Pravin/Softwares/India_catchments_PIML_monthly_modeling/India_catchments_PIML_model/India_catchments_PIML_model_output_new_inputs_in_training/final_results_PIML_with_BLSTM_model_output_with_parameters_and_performance_testing_Feb_2008_2014_new_inputs_in_training_final_for_JOH_revision_with_all_dropout_combinations.csv")
-stn_names
-
-
-# In[4]:
 
 
 ##shifts columns of dataframe df by shift
@@ -105,9 +89,6 @@ def WB(s,o):
     """
     s,o = filter_nan(s,o)
     return 1 - abs(1 - ((sum(s))/(sum(o))))
-
-
-# In[5]:
 
 
 perform = pd.DataFrame()
@@ -392,10 +373,6 @@ output_df_Q.to_csv(''PIML_BLSTM_test_outputs_Q.csv'')
 mc_train2 = mc_train_Q.transpose()
 mc_train_df2 = pd.DataFrame(mc_train2)
 train_df_Q = pd.concat([train_df_Q,mc_train_df2], axis=1)
-
-
-# In[ ]:
-
 
 
 
