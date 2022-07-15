@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 import numpy as np
 import random
 import tensorflow as tf
@@ -16,16 +13,9 @@ import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
-
-# In[2]:
-
-
 # fix the figure size and axes grid
 mpl.rcParams['figure.figsize'] =  (12,12)
 mpl.rcParams['axes.grid'] = False
-
-
-# In[4]:
 
 
 ##shifts columns of dataframe df by shift
@@ -96,9 +86,6 @@ def WB(s,o):
     """
     s,o = filter_nan(s,o)
     return 1 - abs(1 - ((sum(s))/(sum(o))))
-
-
-# In[6]:
 
 
 perform = pd.DataFrame()
@@ -320,8 +307,6 @@ for h in range (0,4):
                 train_df['ET_train'] = train_output_ET
                 train_df['Q_train'] = train_output_Q
 
-
-# In[ ]:
 
 
 
