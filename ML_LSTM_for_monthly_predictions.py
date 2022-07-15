@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 import numpy as np
 import random
 import tensorflow as tf
@@ -17,15 +14,9 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 
-# In[2]:
-
-
 # fix the figure size and axes grid
 mpl.rcParams['figure.figsize'] =  (12,12)
 mpl.rcParams['axes.grid'] = False
-
-
-# In[4]:
 
 
 ##shifts columns of dataframe df by shift
@@ -96,9 +87,6 @@ def WB(s,o):
     """
     s,o = filter_nan(s,o)
     return 1 - abs(1 - ((sum(s))/(sum(o))))
-
-
-# In[5]:
 
 
 perform = pd.DataFrame()
@@ -221,16 +209,5 @@ for h in range (0,4):
                 
                 # save model output in .csv
                 output_df.to_csv('ML_LSTM_test_outputs.csv')
-
-
-# In[1]:
-
-
-pwd
-
-
-# In[ ]:
-
-
 
 
