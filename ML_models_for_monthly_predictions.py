@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 import numpy as np
 import pandas as pd
 from sklearn.metrics import mean_squared_error
@@ -16,9 +13,6 @@ from sklearn.svm import SVR
 from sklearn.gaussian_process.kernels import Matern
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import make_scorer
-
-
-# In[4]:
 
 
 # shifts columns of dataframe df by shift
@@ -143,10 +137,6 @@ def my_custom_loss_func(s,o):
 
 custom_scorer = make_scorer(my_custom_loss_func, greater_is_better=False)
 
-
-# In[5]:
-
-
 # SVR model for Q prediction
 def model_svr(train_dfx,train_dfy):
     c_value = np.linspace(1000, 50000, 50)
@@ -160,9 +150,6 @@ def model_svr(train_dfx,train_dfy):
     predict(best_grid_svr, model_param, test_dfx, test_dfy, 'Q_svr', 'NS_svr', 'PBIAS_svr', 'RMSE_svr', 'WB_svr','Model_svr')
     test_Q_svr = model_svr.predict(test_dfx)
     return test_Q_svr 
-
-
-# In[6]:
 
 
 # GPR model for Q prediction
@@ -182,9 +169,6 @@ def model_gpr_mtrn(train_dfx,train_dfy):
     return test_Q_gpr_mtrn
 
 
-# In[7]:
-
-
 # LASSO regression model for Q prediction
 def model_lasso(train_dfx,train_dfy):
     alphas = np.linspace(0.1, 1.0, 10)
@@ -200,9 +184,6 @@ def model_lasso(train_dfx,train_dfy):
     return test_Q_lasso
 
 
-# In[8]:
-
-
 # Ridge regression model for Q prediction
 def model_ridge(train_dfx,train_dfy):
     alphas = np.linspace(0.1, 1.0, 10)
@@ -216,9 +197,6 @@ def model_ridge(train_dfx,train_dfy):
     predict(best_grid_ridge, model_param, test_dfx, test_dfy, 'Q_ridge', 'NS_ridge', 'PBIAS_ridge', 'RMSE_ridge', 'WB_ridge','Model_ridge')
     test_Q_ridge=model_ridge.predict(test_dfx)    
     return test_Q_ridge
-
-
-# In[16]:
 
 
 Perform = pd.DataFrame()
@@ -263,10 +241,6 @@ Results.to_csv('ML_model_test_outputs.csv')
 # Performance in testing for Q with best model hyperparameters
 Perform = Perform.append(Performance,ignore_index=True)
 print(Perform)
-
-
-# In[ ]:
-
 
 
 
